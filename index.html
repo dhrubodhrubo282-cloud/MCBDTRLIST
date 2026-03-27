@@ -3,114 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC Tiers Clone</title>
+    <title>MCBDTRLIST</title>
     <style>
-        /* মূল থিম এবং ব্যাকগ্রাউন্ড */
         body {
-            background-color: #0d1117; /* গাঢ় কালো রঙ */
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0e11;
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            margin: 0;
         }
 
-        /* প্লেয়ার কার্ডের ডিজাইন */
+        /* ওয়েবসাইট এবং সার্ভারের নাম স্টাইল */
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        .site-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        .server-name {
+            font-size: 14px;
+            color: #8b949e;
+            background: #21262d;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 5px;
+            border: 1px solid #30363d;
+        }
+
         .card {
-            background-color: #161b22;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 12px;
+            background: #161b22;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 10px;
             padding: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             border: 1px solid #30363d;
-            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* র‍্যাঙ্কিং নম্বর (১, ২) */
         .rank {
-            font-size: 28px;
-            font-style: italic;
+            font-size: 24px;
             font-weight: bold;
-            margin-right: 20px;
+            font-style: italic;
+            margin-right: 15px;
             color: #f0f6fc;
+            min-width: 35px;
         }
 
-        /* প্লেয়ারের নাম এবং ডিটেইলস */
-        .player-info {
+        .player-content {
             flex-grow: 1;
         }
 
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
         .player-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 5px;
-            color: #58a6ff; /* নীলচে হাইলাইট */
+            color: #58a6ff;
         }
 
         .region-tag {
-            background-color: #f85149; /* লাল ট্যাগ */
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background-color: #f85149;
             color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            float: right;
         }
 
-        /* ছোট ছোট ট্যাগ বা টায়ারস */
-        .tiers {
+        .tiers-row {
             display: flex;
-            gap: 5px;
-            margin-top: 10px;
+            gap: 6px;
         }
 
-        .tier-box {
+        .tier-icon {
+            width: 32px;
+            height: 32px;
             background-color: #21262d;
-            border: 1px solid #30363d;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 10px;
-            color: #8b949e;
+            font-weight: bold;
+            color: #ec775c;
+            border: 1px solid #444c56;
         }
     </style>
 </head>
 <body>
 
-    <h2>Overall Rankings</h2>
+    <div class="header-section">
+        <h1 class="site-title">MCBDTRLIST</h1>
+        <div class="server-name">SERVER: UNSTABLEBD</div>
+    </div>
 
     <div class="card">
         <div class="rank">1.</div>
-        <div class="player-info">
-            <span class="region-tag">NA</span>
-            <div class="player-name">ItzReal...</div>
-            <div class="tiers">
-                <div class="tier-box">HT3</div>
-                <div class="tier-box">HT1</div>
-                <div class="tier-box">LT2</div>
+        <div class="player-content">
+            <div class="player-header">
+                <div class="player-name">Player Name 1</div>
+                <span class="region-tag">BD</span>
+            </div>
+            <div class="tiers-row">
+                <div class="tier-icon">HT1</div>
             </div>
         </div>
     </div>
 
     <div class="card">
         <div class="rank">2.</div>
-        <div class="player-info">
-            <span class="region-tag" style="background-color: #2ea043;">EU</span>
-            <div class="player-name">coldified</div>
-            <div class="tiers">
-                <div class="tier-box">LT1</div>
-                <div class="tier-box">HT2</div>
-                <div class="tier-box">HT1</div>
+        <div class="player-content">
+            <div class="player-header">
+                <div class="player-name">Player Name 2</div>
+                <span class="region-tag">BD</span>
+            </div>
+            <div class="tiers-row">
+                <div class="tier-icon">LT1</div>
             </div>
         </div>
     </div>
 
 </body>
 </html>
+
