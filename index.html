@@ -16,37 +16,50 @@
             align-items: center;
         }
 
-        /* ওয়েবসাইট এবং সার্ভারের নাম স্টাইল */
         .header-section {
             text-align: center;
             margin-bottom: 30px;
             width: 100%;
         }
+
         .site-title {
             font-size: 28px;
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 2px;
-            margin: 0;
+            margin: 0 0 10px 0;
         }
-        .server-name {
-            font-size: 14px;
-            color: #8b949e;
+
+        .server-info {
             background: #21262d;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 10px 15px;
+            border-radius: 12px;
             display: inline-block;
-            margin-top: 5px;
             border: 1px solid #30363d;
         }
 
+        .server-name {
+            font-size: 14px;
+            color: #8b949e;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .server-ip {
+            font-size: 13px;
+            color: #58a6ff;
+            font-family: monospace;
+        }
+
+        /* কার্ড ডিজাইন - লম্বালম্বি ও স্পষ্ট */
         .card {
             background: #161b22;
             width: 100%;
-            max-width: 450px;
-            border-radius: 10px;
+            max-width: 420px;
+            border-radius: 12px;
             padding: 15px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             border: 1px solid #30363d;
@@ -57,12 +70,13 @@
             font-size: 24px;
             font-weight: bold;
             font-style: italic;
-            margin-right: 15px;
+            margin-right: 20px;
             color: #f0f6fc;
-            min-width: 35px;
+            min-width: 40px;
+            text-align: center;
         }
 
-        .player-content {
+        .player-info {
             flex-grow: 1;
         }
 
@@ -82,8 +96,8 @@
         .region-tag {
             font-size: 11px;
             font-weight: bold;
-            padding: 2px 5px;
-            border-radius: 3px;
+            padding: 2px 6px;
+            border-radius: 4px;
             background-color: #f85149;
             color: white;
         }
@@ -94,16 +108,12 @@
         }
 
         .tier-icon {
-            width: 32px;
-            height: 32px;
-            background-color: #21262d;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: bold;
             color: #ec775c;
+            background: #21262d;
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 1px solid #444c56;
         }
     </style>
@@ -112,49 +122,220 @@
 
     <div class="header-section">
         <h1 class="site-title">MCBDTRLIST</h1>
-        <div class="server-name">SERVER: UNSTABLEBD</div>
-        <div class="server-ip">ip:dragon.senxcloud.com:5034</div>
+        <div class="server-info">
+            <div class="server-name">SERVER: UNSTABLEBD</div>
+            <div class="server-ip">IP: dragon.senxcloud.com:5034</div>
+        </div>
     </div>
 
     <div class="card">
         <div class="rank">1.</div>
-        <div class="player-content">
+        <div class="player-info">
             <div class="player-header">
-                <div class="player-name"Se9ku</div>
+                <span class="player-name">Se9ku</span>
                 <span class="region-tag">BD</span>
             </div>
             <div class="tiers-row">
-                <div class="tier-icon"HT1</div>
+                <div class="tier-icon">HT1</div>
             </div>
         </div>
     </div>
 
     <div class="card">
         <div class="rank">2.</div>
-        <div class="player-content">
+        <div class="player-info">
             <div class="player-header">
-                <div class="player-name"Ghost</div>
+                <span class="player-name">Ghost</span>
                 <span class="region-tag">BD</span>
             </div>
             <div class="tiers-row">
-                <div class="tier-icon"HT2</div>
+                <div class="tier-icon">HT2</div>
             </div>
         </div>
     </div>
-    
+
     <div class="card">
         <div class="rank">3.</div>
-        <div class="player-content">
+        <div class="player-info">
             <div class="player-header">
-                <div class="player-name"Itz_Dhrubo</div>
+                <span class="player-name">Itz_Dhrubo</span>
                 <span class="region-tag">BD</span>
             </div>
             <div class="tiers-row">
-                <div class="tier-icon"HT3</div>
+                <div class="tier-icon">HT3</div>
             </div>
         </div>
-</div>
-    
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCBDTRLIST</title>
+    <style>
+        body {
+            background-color: #0b0e11;
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .site-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
+
+        .server-info {
+            background: #21262d;
+            padding: 10px 15px;
+            border-radius: 12px;
+            display: inline-block;
+            border: 1px solid #30363d;
+        }
+
+        .server-name {
+            font-size: 14px;
+            color: #8b949e;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .server-ip {
+            font-size: 13px;
+            color: #58a6ff;
+            font-family: monospace;
+        }
+
+        /* কার্ড ডিজাইন - লম্বালম্বি ও স্পষ্ট */
+        .card {
+            background: #161b22;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #30363d;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .rank {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            margin-right: 20px;
+            color: #f0f6fc;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .player-info {
+            flex-grow: 1;
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .player-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+
+        .region-tag {
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: #f85149;
+            color: white;
+        }
+
+        .tiers-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tier-icon {
+            font-size: 11px;
+            font-weight: bold;
+            color: #ec775c;
+            background: #21262d;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #444c56;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <h1 class="site-title">MCBDTRLIST</h1>
+        <div class="server-info">
+            <div class="server-name">SERVER: UNSTABLEBD</div>
+            <div class="server-ip">IP: dragon.senxcloud.com:5034</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="rank">1.</div>
+        <div class="player-info">
+            <div class="player-header">
+                <span class="player-name">Se9ku</span>
+                <span class="region-tag">BD</span>
+            </div>
+            <div class="tiers-row">
+                <div class="tier-icon">HT1</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="rank">2.</div>
+        <div class="player-info">
+            <div class="player-header">
+                <span class="player-name">Ghost</span>
+                <span class="region-tag">BD</span>
+            </div>
+            <div class="tiers-row">
+                <div class="tier-icon">HT2</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="rank">3.</div>
+        <div class="player-info">
+            <div class="player-header">
+                <span class="player-name">Itz_Dhrubo</span>
+                <span class="region-tag">BD</span>
+            </div>
+            <div class="tiers-row">
+                <div class="tier-icon">HT3</div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
-
