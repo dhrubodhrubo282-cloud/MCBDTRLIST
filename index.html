@@ -9,153 +9,208 @@
     <style>
         body { 
             margin: 0; font-family: 'Hind Siliguri', sans-serif; 
-            background-color: #0a0a0a; color: white; overflow-x: hidden;
+            background-color: #050505; color: white; overflow-x: hidden;
         }
 
+        /* প্রিমিয়াম ব্যাকগ্রাউন্ড সেটআপ */
         .bg-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            /* আপনার দেওয়া মাইনক্রাফট ক্যাসেল ব্যাকগ্রাউন্ড এখানে সেট করা হয়েছে */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), 
                         url('https://i.imgur.com/vHqQ8rP.png'); 
             background-size: cover; background-position: center;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        /* মাইনক্রাফট অ্যানিমেটেড ক্যানভাস */
+        #mc-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
         }
 
         nav {
             position: fixed; top: 0; width: 100%; height: 60px;
-            background: rgba(0,0,0,0.9); display: flex; align-items: center;
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(15px); /* ব্লার ইফেক্ট */
+            display: flex; align-items: center;
             justify-content: space-between; padding: 0 20px; z-index: 1000;
-            box-sizing: border-box; border-bottom: 1px solid rgba(255, 77, 77, 0.3);
+            box-sizing: border-box; border-bottom: 1px solid rgba(255, 77, 77, 0.2);
         }
 
         .menu-icon, .dc-icon { font-size: 24px; color: #ff4d4d; cursor: pointer; transition: 0.3s; }
 
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: #0d0d0d; transition: 0.4s; z-index: 2000; padding-top: 60px;
+            background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(10px);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding-top: 60px;
             box-shadow: 5px 0 15px rgba(0,0,0,0.5);
         }
         .sidebar.active { left: 0; }
         .sidebar a {
             display: block; padding: 15px 25px; color: white; text-decoration: none;
-            font-size: 1.2rem; border-bottom: 1px solid #1a1a1a; transition: 0.3s;
+            font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
         }
         .sidebar a:hover { background: #ff4d4d; padding-left: 35px; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 25px; color: #ff4d4d; cursor: pointer; }
 
-        .page-section { display: none; padding: 100px 20px 40px; min-height: 80vh; animation: fadeIn 0.5s ease; }
+        .page-section { display: none; padding: 120px 20px 40px; min-height: 80vh; animation: fadeIn 0.6s ease-out; }
         .active-section { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* হোম পেজ - বাম দিকে এলাইন করা */
-        #home {
-            text-align: left; 
-            padding-left: 30px; 
-        }
+        #home { text-align: left; padding-left: 5%; }
 
         .glow-text {
             font-size: clamp(2.5rem, 8vw, 5rem); color: #ff4d4d; text-transform: uppercase;
-            font-weight: 700; letter-spacing: 3px; margin: 10vh 0 20px 0;
-            text-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
-            display: inline-block;
+            font-weight: 700; letter-spacing: 4px; margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 77, 77, 0.6);
+            animation: glowPulse 2s infinite alternate;
         }
         
-        .step-container {
-            display: flex; flex-direction: column; gap: 15px;
+        @keyframes glowPulse {
+            from { text-shadow: 0 0 20px rgba(255, 77, 77, 0.5); }
+            to { text-shadow: 0 0 40px rgba(255, 77, 77, 0.9); }
         }
-        .step-item {
-            font-size: 1.1rem; color: #eee; display: flex; align-items: center;
-            background: rgba(255, 77, 77, 0.2); /* ব্যাকগ্রাউন্ডের সাথে মানানসই করার জন্য অপাসিটি বাড়ানো হয়েছে */
-            padding: 10px 15px;
-            border-left: 4px solid #ff4d4d; width: fit-content;
-            border-radius: 0 8px 8px 0;
-            backdrop-filter: blur(5px); /* হালকা ব্লার ইফেক্ট */
-        }
-        .step-item i { color: #ff4d4d; margin-right: 12px; width: 20px; text-align: center; }
 
-        /* রুলস কার্ড */
+        .step-container { display: flex; flex-direction: column; gap: 15px; }
+        .step-item {
+            font-size: 1.1rem; color: #fff; display: flex; align-items: center;
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 12px 20px;
+            border-left: 5px solid #ff4d4d; width: fit-content;
+            border-radius: 0 12px 12px 0;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .step-item:hover { transform: translateX(10px); background: rgba(255, 77, 77, 0.15); }
+        .step-item i { color: #ff4d4d; margin-right: 15px; font-size: 1.2rem; }
+
         .rules-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; max-width: 1000px; margin: 30px auto;
+            gap: 20px; max-width: 1100px; margin: 30px auto;
         }
         .rule-card {
-            background: rgba(0, 0, 0, 0.6); padding: 20px; border-radius: 12px;
-            border-left: 4px solid #ff4d4d; text-align: left;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1); text-align: left;
+            backdrop-filter: blur(12px); transition: 0.3s;
         }
+        .rule-card:hover { border-color: #ff4d4d; transform: translateY(-5px); background: rgba(255, 77, 77, 0.05); }
+        .rule-card h4 { color: #ff4d4d; margin-top: 0; font-size: 1.3rem; }
 
-        /* আইপি বক্স - মাঝখানে */
-        .footer-ip { padding: 60px 20px; text-align: center; }
+        .footer-ip { padding: 80px 20px; text-align: center; }
         .ip-copy {
-            background: rgba(0, 0, 0, 0.8); padding: 15px 40px; border-radius: 15px;
-            display: inline-block; border: 2px dashed #ff4d4d; cursor: pointer;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 77, 77, 0.1); padding: 20px 50px; border-radius: 20px;
+            display: inline-block; border: 2px solid #ff4d4d; cursor: pointer;
+            backdrop-filter: blur(10px); transition: 0.3s; box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
         }
+        .ip-copy:hover { background: rgba(255, 77, 77, 0.2); transform: scale(1.05); }
     </style>
 </head>
 <body>
 
     <div class="bg-overlay"></div>
+    <canvas id="mc-canvas"></canvas>
 
     <nav>
         <div class="menu-icon" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
-        <div style="font-weight: bold; letter-spacing: 2px;">DELUX SMP</div>
+        <div style="font-weight: bold; letter-spacing: 3px; font-size: 1.2rem; color: #ff4d4d;">DELUX SMP</div>
         <a href="https://discord.gg/fHjZKPGPxB" target="_blank" class="dc-icon"><i class="fab fa-discord"></i></a>
     </nav>
 
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleSidebar()">&times;</div>
-        <a href="#" onclick="showSection('home')">Home</a>
-        <a href="#" onclick="showSection('about')">Rules & Info</a>
-        <a href="store.html">Store</a>
-        <a href="#" onclick="showSection('status')">Status</a>
+        <a href="#" onclick="showSection('home')"><i class="fas fa-home"></i> Home</a>
+        <a href="#" onclick="showSection('about')"><i class="fas fa-book"></i> Rules & Info</a>
+        <a href="store.html"><i class="fas fa-shopping-cart"></i> Store</a>
+        <a href="#" onclick="showSection('status')"><i class="fas fa-signal"></i> Status</a>
     </div>
 
     <section id="home" class="page-section active-section">
         <h1 class="glow-text">DELUX SMP</h1>
         <div class="step-container">
-            <div class="step-item"><i class="fas fa-star"></i> বাংলাদেশের ১ নম্বর সারভাইভাল অভিজ্ঞতা</div>
+            <div class="step-item"><i class="fas fa-crown"></i> বাংলাদেশের ১ নম্বর সারভাইভাল অভিজ্ঞতা</div>
             <div class="step-item"><i class="fas fa-shield-alt"></i> সম্পূর্ণ সুরক্ষিত এবং ল্যাগ-ফ্রি সার্ভার</div>
             <div class="step-item"><i class="fas fa-users"></i> বন্ধুত্বপূর্ণ কমিউনিটি এবং ২৪/৭ সাপোর্ট</div>
-            <div class="step-item"><i class="fas fa-dove"></i> শান্তির সাথে কোনো PvP ছাড়াই গেমিং করুন</div>
+            <div class="step-item"><i class="fas fa-peace"></i> শান্তির সাথে কোনো PvP ছাড়াই গেমিং করুন</div>
         </div>
     </section>
 
     <section id="about" class="page-section">
-        <h2 style="color: #ff4d4d; text-align: center;">SERVER RULES & INFO</h2>
+        <h2 style="color: #ff4d4d; text-align: center; font-size: 2rem; margin-bottom: 40px;">SERVER RULES & INFO</h2>
         <div class="rules-grid">
-            <div class="rule-card"><h4>🚫 No PvP</h4><p>এখানে শান্তিতে সারভাইভ করুন।</p></div>
-            <div class="rule-card"><h4>🛡️ No Griefing</h4><p>কারো প্রপার্টি চুরি করলে সরাসরি ব্যান।</p></div>
-            <div class="rule-card"><h4>🛑 No Hacking</h4><p>হ্যাক ব্যবহার করলে কোনো সতর্কতা ছাড়াই ব্যান।</p></div>
-            <div class="rule-card"><h4>💬 Respect</h4><p>সব প্লেয়ারের সাথে ভালো ব্যবহার করুন।</p></div>
+            <div class="rule-card"><h4>🚫 No PvP</h4><p>এখানে শান্তিতে সারভাইভ করুন। অন্যকে বিরক্ত করা নিষেধ।</p></div>
+            <div class="rule-card"><h4>🛡️ No Griefing</h4><p>কারো প্রপার্টি নষ্ট বা চুরি করলে সরাসরি স্থায়ী ব্যান।</p></div>
+            <div class="rule-card"><h4>🛑 No Hacking</h4><p>যেকোনো প্রকার হ্যাক বা ক্লায়েন্ট ব্যবহার কঠোরভাবে নিষিদ্ধ।</p></div>
+            <div class="rule-card"><h4>💬 Respect</h4><p>সব প্লেয়ার এবং স্টাফদের সাথে মার্জিত ব্যবহার করুন।</p></div>
         </div>
     </section>
 
     <section id="status" class="page-section" style="text-align: center;">
-        <h2 style="color: #ff4d4d;">SERVER STATUS</h2>
-        <div style="background: rgba(0,0,0,0.6); max-width: 400px; margin: 0 auto; padding: 40px; border-radius: 20px; border: 1px solid #ff4d4d; backdrop-filter: blur(10px);">
-            <div id="statText" style="font-size: 1.5rem; font-weight: bold;">Checking...</div>
-            <div style="font-size: 2.5rem; margin: 20px 0; font-weight: bold;" id="onlineCount">0 / 0</div>
+        <h2 style="color: #ff4d4d; margin-bottom: 30px;">SERVER STATUS</h2>
+        <div style="background: rgba(255,255,255,0.03); max-width: 400px; margin: 0 auto; padding: 50px; border-radius: 30px; border: 1px solid rgba(255, 77, 77, 0.4); backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div id="statText" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 10px;">Checking...</div>
+            <div style="font-size: 3rem; margin: 20px 0; font-weight: 700; letter-spacing: 2px;" id="onlineCount">0 / 0</div>
+            <div style="font-size: 0.9rem; color: #aaa;">Last updated: Just now</div>
         </div>
     </section>
 
     <div class="footer-ip">
         <div class="ip-copy" onclick="copyIP()">
-            <span id="ipText" style="font-weight: bold; font-size: 1.5rem; display: block;">play.deluxsmp.fun</span>
-            <span style="font-size: 0.9rem; opacity: 0.8;">Port: 20006</span>
+            <span id="ipText" style="font-weight: bold; font-size: 1.8rem; display: block; color: #fff;">play.deluxsmp.fun</span>
+            <span style="font-size: 1rem; opacity: 0.9; color: #ff4d4d;">Port: 20006 (Click to Copy)</span>
         </div>
     </div>
 
     <script>
+        // Sidebar Logic
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function showSection(id) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
             document.getElementById(id).classList.add('active-section');
+            window.scrollTo(0, 0);
             if(window.innerWidth < 768) toggleSidebar();
         }
         function copyIP() {
             navigator.clipboard.writeText("play.deluxsmp.fun");
-            alert("IP Copied!");
+            alert("IP Copied to Clipboard!");
         }
+
+        // Minecraft Animated Particles
+        const canvas = document.getElementById('mc-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 8 + 2;
+                this.speedY = Math.random() * 0.5 + 0.1;
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 77, 77, ${this.opacity})`;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 60; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        init(); animate();
+
+        // Status Update
         function updateStatus() {
             fetch('https://api.mcstatus.io/v2/status/java/play.deluxsmp.fun:20006')
                 .then(r => r.json()).then(data => {
@@ -168,6 +223,11 @@
                 }).catch(() => {});
         }
         updateStatus(); setInterval(updateStatus, 30000);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
